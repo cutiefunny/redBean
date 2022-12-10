@@ -1,0 +1,30 @@
+html 
+    head 
+        title=title 
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css")
+        link(rel='stylesheet', href='/view/css/main.css')
+        script(src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=52kirtllzz&submodules=geocoder")
+    body
+        center
+            H1= title
+            P 
+            | deviceID : 
+            = deviceID
+            P
+            #map(style="width:380px;height:380px;")
+            //-img#img_main(src="/images/"+file onclick="change()")
+            P 
+            each i in info
+                = i.name
+                | / 당도 : 
+                = i.sugar
+                | / 얼음 : 
+                = i.ice
+                P
+            input(type='hidden' id='deviceID' value=deviceID)
+    script(src="//code.jquery.com/jquery-1.11.0.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js")
+    script(src="/script/main.js")
+    script(src="/script/callAjax.js")
