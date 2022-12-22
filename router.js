@@ -17,3 +17,15 @@ exports.main = function(req,res) {
     });
 
 }
+
+exports.manage = function(req,res) {
+
+    CRUD.searchData("getInfo","info").then(info=>{
+        console.log(info);
+            res.render('manage', { 
+            title: 'redBean manager'
+            , info : info
+        });
+    });
+
+}

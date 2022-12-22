@@ -35,6 +35,7 @@ console.log(moment().format('YYYY-MM-DD HH:mm'));
 
 //라우터
 app.get('/', router.main);
+app.get('/manage', router.manage);
 
 //ajax 컨트롤러
 app.post('/ajax', ajax.controller);

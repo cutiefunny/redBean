@@ -18,10 +18,10 @@ html
             P 
             each i in info
                 = i.name
-                | / 당도 : 
-                = i.sugar
-                | / 얼음 : 
-                = i.ice
+                | / 팥당도 : 
+                = i.bean.sugar
+                | / 얼음당도 : 
+                = i.ice.sugar
                 P
             input(type='hidden' id='deviceID' value=deviceID)
     script(src="//code.jquery.com/jquery-1.11.0.min.js")

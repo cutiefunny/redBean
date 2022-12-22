@@ -1,0 +1,46 @@
+html 
+    head 
+        title=title 
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css")
+        link(rel='stylesheet', href='/view/css/main.css')
+    body
+        center
+            H1= title
+            P 
+            table
+                tr 
+                    th(rowspan='2') 상호명
+                    th(colspan='3', width='210px') 팥
+                    th(colspan='3', width='210px')  얼음
+                    th(rowspan='2', width='400px') 주소
+                tr 
+                    th(width='70px') 당도
+                    th(width='70px') 식감
+                    th(width='70px') 점도
+                    th(width='70px')  당도
+                    th(width='70px')  입자
+                    th(width='70px')  베이스
+                each i in info
+                    tr
+                        td
+                            input(value=i.name, name="name", onchange="change(this)")
+                        td 
+                            input(style="width:70px;" value=i.bean.sugar, name="beanSugar", onchange="change(this)")
+                        td 
+                            input(style="width:70px;" value=i.bean.taste, name="beanTaste", onchange="change(this)")
+                        td 
+                            input(style="width:70px;" value=i.bean.sticky, name="beanSticky", onchange="change(this)")
+                        td 
+                            input(style="width:70px;" value=i.ice.sugar, name="iceSugar", onchange="change(this)")
+                        td 
+                            input(style="width:70px;" value=i.ice.size, name="iceSugar", onchange="change(this)")
+                        td 
+                            input(style="width:70px;" value=i.ice.base, name="iceSugar", onchange="change(this)")
+                        td
+                            input(style="width:400px;" value=i.address, name="address", onchange="change(this)")
+    script(src="//code.jquery.com/jquery-1.11.0.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js")
+    script(src="/script/main.js")
+    script(src="/script/callAjax.js")
