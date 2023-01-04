@@ -16,3 +16,27 @@ exports.searchData = async function (op,col,param){
     
     return res;
 }
+
+//Create
+exports.createData = function (op,col,doc){
+  var collection = db.collection(col);
+  collection.insertOne(doc);
+  
+  return res;
+}
+
+//Update
+exports.updateData = function (op,col,filter,doc){
+  var collection = db.collection(col);
+  collection.updateOne(filter,doc,{upsert:true});
+  
+  return res;
+}
+
+//Delete
+exports.deleteData = function (op,col,doc){
+  var collection = db.collection(col);
+  collection.deleteOne(doc);
+  
+  return res;
+}
