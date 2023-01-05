@@ -15,13 +15,22 @@ html
             P
             #map(style="width:380px;height:380px;")
             //-img#img_main(src="/images/"+file onclick="change()")
-            P 
+            P
+            | 상호 : 
+            input#selectedName
+            P
+            | 당도 : 
+            input#selectedSugar
+            P
+            | 얼음 : 
+            input#selectedIce
             each i in info
-                = i.name
-                | / 당도 : 
-                = i.sugar
-                | / 얼음 : 
-                = i.ice
+                input(type='hidden' name='name' value=i.name) 
+                input(type='hidden' name='sugar' value=i.sugar) 
+                input(type='hidden' name='taste' value=i.taste) 
+                input(type='hidden' name='ice' value=i.ice) 
+                input(type='hidden' name='memo' value=i.memo) 
+                input(type='hidden' name='address' value=i.address)    
                 P
             input(type='hidden' id='deviceID' value=deviceID)
     script(src="//code.jquery.com/jquery-1.11.0.min.js")

@@ -1,5 +1,18 @@
 //#region 엘리먼트를 변수로 선언
-var deviceID = document.getElementById("deviceID").getAttribute('value');
+var name2 = document.getElementsByName("name");
+var sugar = document.getElementsByName("sugar");
+var taste = document.getElementsByName("taste");
+var ice = document.getElementsByName("ice");
+var memo = document.getElementsByName("memo");
+var address = document.getElementsByName("address");
+var createTm = document.getElementsByName("createTm");
+var nameVal = [];
+var sugarVal = [];
+var tasteVal = [];
+var iceVal = [];
+var memoVal = [];
+var addressVal = [];
+var createTmVal = [];
 //#endregion
 
 //페이지 시작 시 수행되는 함수
@@ -12,21 +25,11 @@ window.onload = function(){
         infowindow.open(map, center);
     }
     
-    
-    setMarkers("독막로 61-4 1");
-    // naver.maps.Service.geocode({
-    //     address: '독막로 61-4 1'
-    // }, function(status, response) {
-    //     if (status !== naver.maps.Service.Status.OK) {
-    //         return alert('Something wrong!');
-    //     }
-
-    //     var result = response.result, // 검색 결과의 컨테이너
-    //         items = result.items; // 검색 결과의 배열
-
-    //     // do Something
-    //     alert(items[0].point.x);
-    // });
+    var cnt=0;
+    address.forEach(addr => {
+        setMarkers(addr.getAttribute('value'),[name2[cnt].getAttribute('value'),sugar[cnt].getAttribute('value'),taste[cnt].getAttribute('value'),ice[cnt].getAttribute('value'),memo[cnt].getAttribute('value')]);
+        cnt++;
+    });
     
 };
 
@@ -66,34 +69,56 @@ function onErrorGeolocation() {
     infowindow.open(map, center);
 }
 
-function setMarkers(address){
+function setMarkers(address,info){
 
-        // naver.maps.Service.geocode({
-        //     address: address
-        // }, function(status, response) {
-        //     if (status !== naver.maps.Service.Status.OK) {
-        //         return alert('Something wrong!');
-        //     }
+        naver.maps.Service.geocode({
+            address: address
+        }, function(status, response) {
+            if (status !== naver.maps.Service.Status.OK) {
+                return alert('Something wrong!');
+            }
 
-        //     var result = response.result, // 검색 결과의 컨테이너
-        //         items = result.items; // 검색 결과의 배열
+            var result = response.result, // 검색 결과의 컨테이너
+                items = result.items; // 검색 결과의 배열
 
-            //position = new naver.maps.LatLng(items[0].point.x, items[0].point.y);
-            position = new naver.maps.LatLng(37.5666805, 126.9784147);
+            position = new naver.maps.LatLng(items[0].point.y, items[0].point.x);
 
             var markerOptions = {
                 position: position.destinationPoint(0, 0),
+                address: address,
+                name: info[0],
+                sugar: info[1],
+                taste: info[2],
+                ice: info[3],
+                memo: info[4],
                 map: map,
                 icon: {
                     url: 'image/marker.png',
                     scaledSize: new naver.maps.Size(map.zoom*3, map.zoom*3),
                     origin: new naver.maps.Point(0, 0),
-                    anchor: new naver.maps.Point(25, 26)
+                    anchor: new naver.maps.Point(22, 28)
                 }
             };
             
             var marker = new naver.maps.Marker(markerOptions);
             
             markers.push(marker);
-        //});
+
+            contentString = "<H3>"+marker.name+"<H3>";
+
+            var infowindow = new naver.maps.InfoWindow({
+                content: contentString
+            });
+            
+            naver.maps.Event.addListener(marker, "click", function(e) {
+                if (infowindow.getMap()) {
+                    infowindow.close();
+                } else {
+                    infowindow.open(map, marker);
+                    document.getElementById("selectedName").setAttribute("value",marker.name);
+                    document.getElementById("selectedSugar").setAttribute("value",marker.sugar);
+                    document.getElementById("selectedIce").setAttribute("value",marker.ice);
+                }
+            });
+        });
 }
